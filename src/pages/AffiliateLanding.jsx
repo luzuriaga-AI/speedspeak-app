@@ -7,7 +7,7 @@ const AffiliateLanding = () => {
   return (
     <div className="min-h-screen bg-white text-black p-8 flex flex-col items-center text-center">
       <h1 className="text-3xl md:text-4xl font-bold mb-4">
-        Tu amigo te ha invitado a SpeedSpeak tras cumplir su objetivo de hablar una lengua en solo 31 días 🎉
+        Tu amigo te ha invitado a SpeedSpeak tras cumplir su objetivo de hablar una lengua en solo 31 días
       </h1>
 
       <div className="w-full max-w-3xl h-64 bg-gray-200 rounded-lg mb-6 flex items-center justify-center">
