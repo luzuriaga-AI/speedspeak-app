@@ -9,8 +9,12 @@ const AffiliatePage = () => {
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const email = encodeURIComponent(user.email); // encode por si el correo tiene caracteres especiales
-        setAffiliateCode(`https://speakspeak.es/afiliado?ref=${email}`);
+        const email = encodeURIComponent(user.email);
+        const baseUrl = window.location.hostname.includes('localhost')
+          ? 'http://localhost:3000/afiliado'
+          : 'https://speedspeak.es/afiliado';
+
+        setAffiliateCode(`${baseUrl}?ref=${email}`);
       }
     });
   }, []);
@@ -22,25 +26,30 @@ const AffiliatePage = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-white text-black text-center">
-      <h1 className="bg-purple-600 text-white text-2xl font-bold py-3 px-6 rounded-full inline-block mb-10">
+    <div className="min-h-screen p-6 bg-gray-100 text-center flex flex-col items-center">
+      {/* Botón superior morado */}
+      <div className="bg-purple-600 text-white text-2xl font-bold py-3 px-6 rounded-full inline-block mb-10">
         🔗 Link de Afiliado
-      </h1>
+      </div>
 
-      <p className="text-lg mb-4">
-        Comparte este enlace con tus amigos y gana recompensas por cada persona que se apunte:
-      </p>
+      {/* Bloque negro con contenido */}
+      <div className="bg-black text-white p-6 rounded-xl shadow-md max-w-xl w-full">
+        <p className="text-base font-bold mb-4">
+          Comparte este link con tus amigos y obtén 50$ al instante por cada amigo que se apunte a SpeedSpeak gracias a ti:
+        </p>
 
-      <div className="bg-gray-100 p-4 rounded-xl shadow-md inline-block mb-4 max-w-xl w-full">
-        <input
-          type="text"
-          value={affiliateCode}
-          readOnly
-          className="w-full text-center p-3 border rounded-md font-mono text-sm"
-        />
+        <a
+          href={affiliateCode}
+          className="block font-bold text-blue-500 underline break-all mb-4"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          {affiliateCode}
+        </a>
+
         <button
           onClick={handleCopy}
-          className="mt-4 bg-purple-600 hover:bg-purple-500 text-white font-semibold py-2 px-5 rounded-full transition"
+          className="bg-white text-black font-semibold py-2 px-5 rounded-full transition hover:bg-gray-200"
         >
           {copied ? 'Copiado ✅' : 'Copiar Link'}
         </button>
