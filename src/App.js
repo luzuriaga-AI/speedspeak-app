@@ -1,7 +1,5 @@
-// src/App.js
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-
 import Home from './pages/Home';
 import AuthPage from './pages/AuthPage';
 import BuyCourse from './pages/BuyCourse';
@@ -12,7 +10,7 @@ import AchievementsPage from './pages/AchievementsPage';
 import VideosPage from './pages/VideosPage';
 import ExamsPage from './pages/ExamsPage';
 import AffiliatePage from './pages/AffiliatePage';
-import AffiliateLanding from './pages/AffiliateLanding'; // ✅ NUEVO
+import AffiliateLanding from './pages/AffiliateLanding'; // ✅ Importar AffiliateLanding
 
 const App = () => {
   return (
@@ -28,7 +26,7 @@ const App = () => {
         <Route path="/videos" element={<VideosPage />} />
         <Route path="/exams" element={<ExamsPage />} />
         <Route path="/affiliate" element={<AffiliatePage />} />
-        <Route path="/afiliado" element={<AffiliateLanding />} /> {/* ✅ NUEVA RUTA */}
+        <Route path="/afiliado" element={<AffiliateLanding />} /> {/* ✅ Aquí se activa el link */}
       </Routes>
     </Router>
   );
