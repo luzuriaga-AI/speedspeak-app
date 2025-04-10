@@ -4,7 +4,7 @@ import { useSearchParams, useNavigate } from 'react-router-dom';
 const AffiliateLanding = () => {
   const [searchParams] = useSearchParams();
   const navigate = useNavigate();
-  const referrer = searchParams.get('ref') || 'su amigo';
+  const referrer = decodeURIComponent(searchParams.get('ref') || 'su amigo');
 
   return (
     <div className="min-h-screen bg-white text-black p-8 flex flex-col items-center text-center">

@@ -22,7 +22,7 @@ const AffiliatePage = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100 text-center">
+    <div className="min-h-screen p-6 bg-white text-black text-center">
       <h1 className="bg-purple-600 text-white text-2xl font-bold py-3 px-6 rounded-full inline-block mb-10">
         🔗 Link de Afiliado
       </h1>
@@ -31,7 +31,7 @@ const AffiliatePage = () => {
         Comparte este enlace con tus amigos y gana recompensas por cada persona que se apunte:
       </p>
 
-      <div className="bg-white p-4 rounded-xl shadow-md inline-block mb-4 max-w-xl w-full">
+      <div className="bg-gray-100 p-4 rounded-xl shadow-md inline-block mb-4 max-w-xl w-full">
         <input
           type="text"
           value={affiliateCode}
