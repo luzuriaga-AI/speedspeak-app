@@ -1,6 +1,5 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import animationImage from './assets/image.png'; // Asegúrate de tener esta imagen en src/assets
 
 const Home = () => {
   return (
@@ -28,8 +27,13 @@ const Home = () => {
           </Link>
         </div>
 
+        {/* Animación de SpeedSpeak (por ahora texto) */}
+        <div className="w-full max-w-3xl h-64 bg-gray-200 rounded-lg mx-auto mb-20 flex items-center justify-center">
+          <p className="text-gray-500">[Aquí se mostrará la animación de SpeedSpeak 🎥]</p>
+        </div>
+
         {/* Sección de beneficios */}
-        <div className="mt-28">
+        <div className="mt-8">
           <h2 className="text-2xl font-bold mb-6">¿Por qué SpeedSpeak?</h2>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-5 max-w-5xl mx-auto mb-20">
@@ -50,15 +54,6 @@ const Home = () => {
             ))}
           </div>
         </div>
-      </div>
-
-      {/* Imagen animada a pantalla completa */}
-      <div className="w-screen mt-12">
-        <img
-          src={animationImage}
-          alt="Animación"
-          className="w-full h-auto"
-        />
       </div>
     </>
   );
