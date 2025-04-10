@@ -5,31 +5,30 @@ const SpeedSpeakBot = () => {
   const [messages, setMessages] = useState([
     {
       from: 'bot',
-      text: '¡Hola! Soy SpeedSpeakBot 🤖. ¿En qué idioma quieres practicar hoy?'
+      text: '¡Hola! Soy SpeedSpeak-AI 🧬. ¿En qué idioma quieres practicar hoy?'
     }
   ]);
   const [input, setInput] = useState('');
 
   const handleSend = () => {
     if (!input.trim()) return;
-    setMessages((prev) => [
-      ...prev,
-      { from: 'user', text: input },
-      {
-        from: 'bot',
-        text: 'Pronto responderé con inteligencia real. Por ahora soy una demo simpática 🤖💬'
-      }
-    ]);
+
+    const userMessage = { from: 'user', text: input };
+    const fakeReply = {
+      from: 'bot',
+      text: 'Pronto responderé con inteligencia real. Por ahora soy una demo simpática 🧬💬'
+    };
+
+    setMessages((prev) => [...prev, userMessage, fakeReply]);
     setInput('');
   };
 
   return (
     <>
-      {/* Barra inferior tipo dock separada */}
       {!open && (
         <div className="fixed bottom-4 left-4 right-4 max-w-5xl mx-auto bg-black text-white px-6 py-3 rounded-xl flex justify-between items-center z-50 shadow-lg">
           <span className="font-semibold text-sm md:text-base">
-            SpeedSpeakBot 🤖 ¿Quieres practicar ahora?
+            SpeedSpeak-AI 🧬 ¿Quieres practicar ahora?
           </span>
           <button
             onClick={() => setOpen(true)}
@@ -40,11 +39,10 @@ const SpeedSpeakBot = () => {
         </div>
       )}
 
-      {/* Ventana flotante del chat */}
       {open && (
         <div className="fixed bottom-6 right-6 z-50 w-80 h-96 bg-white rounded-xl shadow-lg flex flex-col overflow-hidden border border-gray-300">
           <div className="bg-blue-600 text-white p-3 font-bold flex justify-between items-center">
-            SpeedSpeakBot 🤖
+            SpeedSpeak-AI 🧬
             <button onClick={() => setOpen(false)}>✖️</button>
           </div>
           <div className="flex-1 p-3 overflow-y-auto space-y-2 text-sm">

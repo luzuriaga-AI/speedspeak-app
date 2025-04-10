@@ -5,9 +5,8 @@ const AffiliatePage = () => {
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    // Simulamos recuperar un nombre de usuario del localStorage
-    const username = localStorage.getItem('username') || 'usuario123';
-    setAffiliateCode(`https://speedspeak.es/afiliado?codigo=${username}`);
+    const userId = localStorage.getItem('userId') || 'usuario123';
+    setAffiliateCode(`https://speedspeak.es/afiliado?codigo=${userId}`);
   }, []);
 
   const handleCopy = () => {
@@ -22,7 +21,9 @@ const AffiliatePage = () => {
         🔗 Link de Afiliado
       </h1>
 
-      <p className="text-lg mb-4">Comparte este enlace con tus amigos y gana recompensas por cada persona que se apunte:</p>
+      <p className="text-lg mb-4">
+        Comparte este enlace con tus amigos y gana recompensas por cada persona que se apunte:
+      </p>
 
       <div className="bg-white p-4 rounded-xl shadow-md inline-block mb-4 max-w-xl w-full">
         <input

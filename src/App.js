@@ -13,20 +13,22 @@ import AffiliatePage from './pages/AffiliatePage';
 
 const App = () => {
   return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/auth" element={<AuthPage />} />
-        <Route path="/buy" element={<BuyCourse />} />
-        <Route path="/dashboard" element={<UserDashboard />} />
-        <Route path="/checkout" element={<Checkout />} />
-        <Route path="/lesson/:id" element={<Lesson />} />
-        <Route path="/achievements" element={<AchievementsPage />} />
-        <Route path="/videos" element={<VideosPage />} />
-        <Route path="/exams" element={<ExamsPage />} />
-        <Route path="/affiliate" element={<AffiliatePage />} />
-      </Routes>
-    </Router>
+    <div className="dark min-h-screen"> {/* 👈 Activa el modo oscuro global */}
+      <Router>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/auth" element={<AuthPage />} />
+          <Route path="/buy" element={<BuyCourse />} />
+          <Route path="/dashboard" element={<UserDashboard />} />
+          <Route path="/checkout" element={<Checkout />} />
+          <Route path="/lesson/:id" element={<Lesson />} />
+          <Route path="/achievements" element={<AchievementsPage />} />
+          <Route path="/videos" element={<VideosPage />} />
+          <Route path="/exams" element={<ExamsPage />} />
+          <Route path="/affiliate" element={<AffiliatePage />} />
+        </Routes>
+      </Router>
+    </div>
   );
 };
 

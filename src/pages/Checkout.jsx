@@ -31,12 +31,14 @@ const Checkout = () => {
     if (name && email && password && phone) {
       try {
         await signInWithEmailAndPassword(auth, email, password)
-          .then(async () => {
+          .then(async (userCredential) => {
+            localStorage.setItem('userId', userCredential.user.uid);
             console.log("Inicio de sesión exitoso");
           })
           .catch(async () => {
             const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             const userId = userCredential.user.uid;
+            localStorage.setItem('userId', userId);
 
             await setDoc(doc(db, 'alumnos', userId), {
               nombre: name,
@@ -146,7 +148,7 @@ const Checkout = () => {
           />
 
           <div className="bg-black text-white text-sm px-4 py-2 rounded-md text-center">
-          Ya tienes cuenta? Usa tu correo y contraseña. Si no, se creará una automáticamente para ti con el correo y la contraseña que introduzcas.
+            Ya tienes cuenta? Usa tu correo y contraseña. Si no, se creará una automáticamente para ti con el correo y la contraseña que introduzcas.
           </div>
 
           <input
