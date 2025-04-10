@@ -9,10 +9,21 @@ const UserDashboard = () => {
     const saved = localStorage.getItem('completedLessons');
     return saved ? JSON.parse(saved) : [];
   });
+  const [language, setLanguage] = useState(null);
+  const [level, setLevel] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
     setLessons(lessonsData);
+
+    const storedLang = localStorage.getItem('selectedLang');
+    const storedLevel = localStorage.getItem('selectedLevel');
+
+    if (storedLang && storedLevel) {
+      const parsedLang = JSON.parse(storedLang);
+      setLanguage(parsedLang);
+      setLevel(storedLevel);
+    }
   }, []);
 
   useEffect(() => {
@@ -61,7 +72,10 @@ const UserDashboard = () => {
       {/* Encabezado con idioma y nivel */}
       <div className="mb-4">
         <h1 className="text-4xl md:text-5xl font-bold flex items-center gap-2">
-          🇺🇸 English <span className="text-gray-500">- Level B2</span>
+          {language?.flagUrl && (
+            <img src={language.flagUrl} alt={language.name} className="w-8 h-8 rounded-full" />
+          )}
+          {language?.name || 'Idioma'} <span className="text-gray-500">- Level {level || 'Nivel'}</span>
         </h1>
       </div>
 
