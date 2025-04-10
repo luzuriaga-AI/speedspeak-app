@@ -2,6 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import lessonsData from '../data/lessons.json';
 import SpeedSpeakBot from '../components/SpeedSpeakBot';
+import { auth, db } from '../firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
+import { doc, getDoc, setDoc } from 'firebase/firestore';
 
 const UserDashboard = () => {
   const [lessons, setLessons] = useState([]);
@@ -11,6 +14,7 @@ const UserDashboard = () => {
   });
   const [language, setLanguage] = useState(null);
   const [level, setLevel] = useState(null);
+  const [userId, setUserId] = useState(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -18,25 +22,32 @@ const UserDashboard = () => {
 
     const storedLang = localStorage.getItem('selectedLang');
     const storedLevel = localStorage.getItem('selectedLevel');
-
     if (storedLang && storedLevel) {
       const parsedLang = JSON.parse(storedLang);
       setLanguage(parsedLang);
       setLevel(storedLevel);
     }
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        setUserId(user.uid);
+        const userDoc = await getDoc(doc(db, 'alumnos', user.uid));
+        if (userDoc.exists()) {
+          const data = userDoc.data();
+          if (data.completedLessons) {
+            setCompletedLessons(data.completedLessons);
+          }
+        }
+      }
+    });
   }, []);
 
   useEffect(() => {
     localStorage.setItem('completedLessons', JSON.stringify(completedLessons));
-  }, [completedLessons]);
-
-  const toggleLesson = (id) => {
-    if (completedLessons.includes(id)) {
-      setCompletedLessons(completedLessons.filter((lid) => lid !== id));
-    } else {
-      setCompletedLessons([...completedLessons, id]);
+    if (userId) {
+      setDoc(doc(db, 'alumnos', userId), { completedLessons }, { merge: true });
     }
-  };
+  }, [completedLessons, userId]);
 
   const getProgress = () => {
     return lessons.length > 0
