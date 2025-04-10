@@ -1,12 +1,20 @@
 import React, { useEffect, useState } from 'react';
+import { auth } from '../firebaseConfig';
+import { onAuthStateChanged } from 'firebase/auth';
 
 const AffiliatePage = () => {
   const [affiliateCode, setAffiliateCode] = useState('');
   const [copied, setCopied] = useState(false);
 
   useEffect(() => {
-    const userId = localStorage.getItem('userId') || 'usuario123';
-    setAffiliateCode(`https://speedspeak.es/afiliado?codigo=${userId}`);
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const emailEncoded = encodeURIComponent(user.email);
+        setAffiliateCode(`https://speedspeak.es/afiliado?codigo=${emailEncoded}`);
+      } else {
+        setAffiliateCode('Inicia sesión para obtener tu link de afiliado.');
+      }
+    });
   }, []);
 
   const handleCopy = () => {
@@ -16,16 +24,14 @@ const AffiliatePage = () => {
   };
 
   return (
-    <div className="min-h-screen p-6 bg-gray-100 text-center">
+    <div className="min-h-screen p-6 bg-black text-white text-center">
       <h1 className="bg-purple-600 text-white text-2xl font-bold py-3 px-6 rounded-full inline-block mb-10">
         🔗 Link de Afiliado
       </h1>
 
-      <p className="text-lg mb-4">
-        Comparte este enlace con tus amigos y gana recompensas por cada persona que se apunte:
-      </p>
+      <p className="text-lg mb-4">Comparte este enlace con tus amigos y gana recompensas por cada persona que se apunte:</p>
 
-      <div className="bg-white p-4 rounded-xl shadow-md inline-block mb-4 max-w-xl w-full">
+      <div className="bg-white text-black p-4 rounded-xl shadow-md inline-block mb-4 max-w-xl w-full">
         <input
           type="text"
           value={affiliateCode}
