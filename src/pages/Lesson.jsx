@@ -63,14 +63,19 @@ const Lesson = () => {
   };
 
   const handleUpload = async () => {
-    console.log('Archivo seleccionado:', materialFile); // 👈 NUEVO LOG
-
     if (!materialFile) return;
 
+    console.log('⏫ Subiendo archivo:', materialFile.name);
+
     const fileRef = ref(storage, `lesson-materials/${id}/${materialFile.name}`);
-    await uploadBytes(fileRef, materialFile);
-    fetchMaterials();
-    setMaterialFile(null);
+    try {
+      await uploadBytes(fileRef, materialFile);
+      console.log('✅ Archivo subido con éxito');
+      fetchMaterials();
+      setMaterialFile(null);
+    } catch (error) {
+      console.error('❌ Error subiendo el archivo:', error);
+    }
   };
 
   if (!lesson) return <div className="p-6">Lección no encontrada</div>;

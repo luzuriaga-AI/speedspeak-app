@@ -1,5 +1,16 @@
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import basqueFlag from './assets/basque-flag.png';
+
+const languages = [
+  { code: 'es', name: 'Español', flagUrl: 'https://www.countryflags.com/wp-content/uploads/spain-flag-png-large.png' },
+  { code: 'en', name: 'English', flagUrl: 'https://www.countryflags.com/wp-content/uploads/united-kingdom-flag-png-large.png' },
+  { code: 'de', name: 'Deutsch', flagUrl: 'https://www.countryflags.com/wp-content/uploads/germany-flag-png-large.png' },
+  { code: 'fr', name: 'Français', flagUrl: 'https://www.countryflags.com/wp-content/uploads/france-flag-png-large.png' },
+  { code: 'it', name: 'Italiano', flagUrl: 'https://www.countryflags.com/wp-content/uploads/italy-flag-png-large.png' },
+  { code: 'ar', name: 'العربية', flagUrl: 'https://www.countryflags.com/wp-content/uploads/united-arab-emirates-flag-png-large.png' },
+  { code: 'eu', name: 'Euskara', flagUrl: basqueFlag },
+];
 
 const AffiliateLanding = () => {
   const navigate = useNavigate();
@@ -10,8 +21,20 @@ const AffiliateLanding = () => {
         Tu amigo te ha invitado a SpeedSpeak tras cumplir su objetivo de hablar una lengua en solo 31 días
       </h1>
 
-      <div className="w-full max-w-3xl h-64 bg-gray-200 rounded-lg mb-6 flex items-center justify-center">
-        <p className="text-gray-500">[Aquí se mostrará la animación de SpeedSpeak 🎥]</p>
+      {/* Banderas en una fila */}
+      <div className="w-full max-w-4xl flex flex-wrap justify-center items-center gap-4 mb-6">
+        {languages.map((lang) => (
+          <div
+            key={lang.code}
+            className="w-20 h-14 rounded overflow-hidden shadow-md"
+          >
+            <img
+              src={lang.flagUrl}
+              alt={lang.name}
+              className="w-full h-full object-cover"
+            />
+          </div>
+        ))}
       </div>
 
       <button
