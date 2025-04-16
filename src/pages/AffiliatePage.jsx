@@ -35,7 +35,7 @@ const AffiliatePage = () => {
       {/* Bloque negro con contenido */}
       <div className="bg-black text-white p-6 rounded-xl shadow-md max-w-xl w-full">
         <p className="text-base font-bold mb-4">
-          Comparte este link con tus amigos y obtén 50$ al instante por cada amigo que se apunte a SpeedSpeak gracias a ti:
+          Comparte este link con tus amigos y obtén 100$ al instante por cada amigo que se apunte a SpeedSpeak gracias a ti:
         </p>
 
         <a
